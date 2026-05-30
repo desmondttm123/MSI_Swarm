@@ -1,0 +1,59 @@
+# Build directories
+build/
+install/
+log/
+
+# Colcon
+.colcon/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+*.egg-info/
+dist/
+*.egg
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# ROS
+devel/
+*.tar.gz
+
+# Gazebo
+.gazebo/
+.ignition/
+
+# Testing
+.coverage
+htmlcov/
+
+# CMake
+CMakeCache.txt
+cmake_install.cmake
+CMakeFiles/
+CTestTestfile.cmake
+CTestConfiguration.ini
+CTestCustom.cmake
+
+# Misc
+*.o
+*.a
+*.so
+*.so.*
+*.dylib
+*.su
+*.gch
+*.out
+*.app
