@@ -19,6 +19,9 @@ def generate_launch_description():
     gui = LaunchConfiguration("gui")
     use_rviz = LaunchConfiguration("use_rviz")
     use_joy = LaunchConfiguration("use_joy")
+    spawn_x = LaunchConfiguration("spawn_x")
+    spawn_y = LaunchConfiguration("spawn_y")
+    spawn_z = LaunchConfiguration("spawn_z")
     joy_config = PathJoinSubstitution([pkg_share, "config", "joy.yaml"])
     rviz_config = PathJoinSubstitution([pkg_share, "rviz", "microbot_sim.rviz"])
 
@@ -47,11 +50,11 @@ def generate_launch_description():
                     "-topic",
                     "robot_description",
                     "-x",
-                    "0",
+                    spawn_x,
                     "-y",
-                    "0",
+                    spawn_y,
                     "-z",
-                    "0.0",
+                    spawn_z,
                 ],
                 output="screen",
             )
@@ -72,6 +75,9 @@ def generate_launch_description():
             DeclareLaunchArgument("gui", default_value="true"),
             DeclareLaunchArgument("use_rviz", default_value="true"),
             DeclareLaunchArgument("use_joy", default_value="true"),
+            DeclareLaunchArgument("spawn_x", default_value="-3.65"),
+            DeclareLaunchArgument("spawn_y", default_value="0.0"),
+            DeclareLaunchArgument("spawn_z", default_value="0.0"),
             SetEnvironmentVariable(
                 name="GZ_SIM_RESOURCE_PATH",
                 value=[
