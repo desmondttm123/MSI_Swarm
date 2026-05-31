@@ -1,5 +1,5 @@
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, SetEnvironmentVariable
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, SetEnvironmentVariable, TimerAction
 from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import Command, EnvironmentVariable, LaunchConfiguration, PathJoinSubstitution, PythonExpression
@@ -35,22 +35,27 @@ def generate_launch_description():
         )
     }
 
-    spawn_robot = Node(
-        package="ros_gz_sim",
-        executable="create",
-        arguments=[
-            "-name",
-            "microbot",
-            "-topic",
-            "robot_description",
-            "-x",
-            "0",
-            "-y",
-            "0",
-            "-z",
-            "0.0",
+    spawn_robot = TimerAction(
+        period=2.0,
+        actions=[
+            Node(
+                package="ros_gz_sim",
+                executable="create",
+                arguments=[
+                    "-name",
+                    "microbot",
+                    "-topic",
+                    "robot_description",
+                    "-x",
+                    "0",
+                    "-y",
+                    "0",
+                    "-z",
+                    "0.0",
+                ],
+                output="screen",
+            )
         ],
-        output="screen",
     )
 
     gz_args = [
@@ -62,7 +67,7 @@ def generate_launch_description():
         [
             DeclareLaunchArgument(
                 "world",
-                default_value=PathJoinSubstitution([pkg_share, "worlds", "empty.sdf"]),
+                default_value=PathJoinSubstitution([pkg_share, "worlds", "arena.sdf"]),
             ),
             DeclareLaunchArgument("gui", default_value="true"),
             DeclareLaunchArgument("use_rviz", default_value="true"),
